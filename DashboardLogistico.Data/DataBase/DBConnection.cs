@@ -26,7 +26,6 @@ namespace DashboardLogistico.Data
             else
             {
                 sqliteConnection = new SQLiteConnection($"Data Source={caminho}; Version=3;");
-                CriarTabelaSQlite();
             }
             
         }
@@ -96,6 +95,10 @@ namespace DashboardLogistico.Data
                                         Unidade VARCHAR(200) NULL,
                                         HoraLargada VARCHAR(100) NOT NULL
                                         );";
+
+                    cmd.ExecuteNonQuery();
+
+                    cmd.CommandText = @"INSER INT Unidades (Unidade, HoraLargada) VALUES ('Exemplo', '10:00');";
 
                     cmd.ExecuteNonQuery();
 

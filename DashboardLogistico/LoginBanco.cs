@@ -105,23 +105,31 @@ namespace DashboardLogistico
 
         private async Task AdicionarNotasBancoAsync(string caminho)
         {
-            
+            try
+            {
+                IProgress<NotaFiscal> progress = new Progress<NotaFiscal>();
 
-            IProgress<NotaFiscal> progress = new Progress<NotaFiscal>();
+                var novasNotas = await _repositoryNota.GetNotasCSVAsync(caminho, progress, CancellationToken.None);
 
-            var novasNotas = await _repositoryNota.GetNotasCSVAsync(caminho, progress, CancellationToken.None);
+                progressBarCSV.Maximum = novasNotas.Count();
 
-            progressBarCSV.Maximum = novasNotas.Count();
+                progress = new Progress<NotaFiscal>(n => { progressBarCSV.Value++; });
 
-            progress = new Progress<NotaFiscal>(n => { progressBarCSV.Value++; });
+                await _repositoryNota.SaveNotasAsync(novasNotas, progress, CancellationToken.None);
 
-            await _repositoryNota.SaveNotasAsync(novasNotas, progress, CancellationToken.None);
+                _repositoryNota._dbConnection.CloseConnection();
 
-            _repositoryNota._dbConnection.CloseConnection();
+                MessageBox.Show("Carregamento Finalizado \n Total de Notas carregadas: " + novasNotas.Count(), "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
-            MessageBox.Show("Carregamento Finalizado \n Total de Notas carregadas: " + novasNotas.Count(), "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                GC.Collect();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                progressBarCSV.Visible = false;
+            }
 
-            GC.Collect();
+
 
         }
 

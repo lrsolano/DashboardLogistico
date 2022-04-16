@@ -82,13 +82,7 @@ namespace DashboardLogistico
             this.tabTempoEntrega = new System.Windows.Forms.TabPage();
             this.buttonTempoEntrega = new System.Windows.Forms.Button();
             this.dataTempoEntrega = new System.Windows.Forms.DataGridView();
-            this.tabIndicadores = new System.Windows.Forms.TabPage();
             this.dataIndicadores = new System.Windows.Forms.DataGridView();
-            this.agrupamentoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.transportesDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.homologacaoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.aderenciaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.largadaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dadoIndicadorBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tabDados = new System.Windows.Forms.TabPage();
             this.buttonCarregarDados = new System.Windows.Forms.Button();
@@ -131,6 +125,11 @@ namespace DashboardLogistico
             this.maximoJornada = new System.Windows.Forms.NumericUpDown();
             this.label9 = new System.Windows.Forms.Label();
             this.saveDados = new System.Windows.Forms.SaveFileDialog();
+            this.agrupamentoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.transportesDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.homologacaoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.aderenciaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.largadaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             buttonFiltrar = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.graficoBaixa)).BeginInit();
@@ -142,7 +141,6 @@ namespace DashboardLogistico
             ((System.ComponentModel.ISupportInitialize)(this.dataJornadaTrabalho)).BeginInit();
             this.tabTempoEntrega.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataTempoEntrega)).BeginInit();
-            this.tabIndicadores.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataIndicadores)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dadoIndicadorBindingSource)).BeginInit();
             this.tabDados.SuspendLayout();
@@ -276,7 +274,7 @@ namespace DashboardLogistico
             series1.Legend = "Legend1";
             series1.Name = "Series1";
             this.graficoBaixa.Series.Add(series1);
-            this.graficoBaixa.Size = new System.Drawing.Size(1460, 211);
+            this.graficoBaixa.Size = new System.Drawing.Size(1021, 211);
             this.graficoBaixa.TabIndex = 2;
             this.graficoBaixa.Text = "chart1";
             title1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
@@ -289,7 +287,6 @@ namespace DashboardLogistico
             this.tabControl1.Controls.Add(this.tabFiltros);
             this.tabControl1.Controls.Add(this.tabJornada);
             this.tabControl1.Controls.Add(this.tabTempoEntrega);
-            this.tabControl1.Controls.Add(this.tabIndicadores);
             this.tabControl1.Controls.Add(this.tabDados);
             this.tabControl1.Controls.Add(this.tabParametros);
             this.tabControl1.Location = new System.Drawing.Point(0, 27);
@@ -300,6 +297,7 @@ namespace DashboardLogistico
             // 
             // tabFiltros
             // 
+            this.tabFiltros.Controls.Add(this.dataIndicadores);
             this.tabFiltros.Controls.Add(this.graficoLargada);
             this.tabFiltros.Controls.Add(this.graficoAderencia);
             this.tabFiltros.Controls.Add(this.graficoBaixa);
@@ -344,7 +342,7 @@ namespace DashboardLogistico
             series2.Legend = "Legend1";
             series2.Name = "Series1";
             this.graficoLargada.Series.Add(series2);
-            this.graficoLargada.Size = new System.Drawing.Size(1460, 211);
+            this.graficoLargada.Size = new System.Drawing.Size(1021, 211);
             this.graficoLargada.TabIndex = 19;
             this.graficoLargada.Text = "chart2";
             title2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
@@ -369,7 +367,7 @@ namespace DashboardLogistico
             series3.Legend = "Legend1";
             series3.Name = "Series1";
             this.graficoAderencia.Series.Add(series3);
-            this.graficoAderencia.Size = new System.Drawing.Size(1460, 211);
+            this.graficoAderencia.Size = new System.Drawing.Size(1021, 211);
             this.graficoAderencia.TabIndex = 18;
             this.graficoAderencia.Text = "chart1";
             title3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
@@ -580,19 +578,10 @@ namespace DashboardLogistico
             this.dataTempoEntrega.Size = new System.Drawing.Size(1480, 765);
             this.dataTempoEntrega.TabIndex = 1;
             // 
-            // tabIndicadores
-            // 
-            this.tabIndicadores.Controls.Add(this.dataIndicadores);
-            this.tabIndicadores.Location = new System.Drawing.Point(4, 22);
-            this.tabIndicadores.Name = "tabIndicadores";
-            this.tabIndicadores.Size = new System.Drawing.Size(1476, 796);
-            this.tabIndicadores.TabIndex = 5;
-            this.tabIndicadores.Text = "Indicadores";
-            this.tabIndicadores.UseVisualStyleBackColor = true;
-            // 
             // dataIndicadores
             // 
             this.dataIndicadores.AutoGenerateColumns = false;
+            this.dataIndicadores.BackgroundColor = System.Drawing.Color.White;
             this.dataIndicadores.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataIndicadores.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.agrupamentoDataGridViewTextBoxColumn,
@@ -601,40 +590,10 @@ namespace DashboardLogistico
             this.aderenciaDataGridViewTextBoxColumn,
             this.largadaDataGridViewTextBoxColumn});
             this.dataIndicadores.DataSource = this.dadoIndicadorBindingSource;
-            this.dataIndicadores.Location = new System.Drawing.Point(8, 15);
+            this.dataIndicadores.Location = new System.Drawing.Point(994, 71);
             this.dataIndicadores.Name = "dataIndicadores";
-            this.dataIndicadores.Size = new System.Drawing.Size(1460, 778);
+            this.dataIndicadores.Size = new System.Drawing.Size(474, 629);
             this.dataIndicadores.TabIndex = 0;
-            // 
-            // agrupamentoDataGridViewTextBoxColumn
-            // 
-            this.agrupamentoDataGridViewTextBoxColumn.DataPropertyName = "Agrupamento";
-            this.agrupamentoDataGridViewTextBoxColumn.HeaderText = "Agrupamento";
-            this.agrupamentoDataGridViewTextBoxColumn.Name = "agrupamentoDataGridViewTextBoxColumn";
-            // 
-            // transportesDataGridViewTextBoxColumn
-            // 
-            this.transportesDataGridViewTextBoxColumn.DataPropertyName = "Transportes";
-            this.transportesDataGridViewTextBoxColumn.HeaderText = "Transportes";
-            this.transportesDataGridViewTextBoxColumn.Name = "transportesDataGridViewTextBoxColumn";
-            // 
-            // homologacaoDataGridViewTextBoxColumn
-            // 
-            this.homologacaoDataGridViewTextBoxColumn.DataPropertyName = "Homologacao";
-            this.homologacaoDataGridViewTextBoxColumn.HeaderText = "Homologacao";
-            this.homologacaoDataGridViewTextBoxColumn.Name = "homologacaoDataGridViewTextBoxColumn";
-            // 
-            // aderenciaDataGridViewTextBoxColumn
-            // 
-            this.aderenciaDataGridViewTextBoxColumn.DataPropertyName = "Aderencia";
-            this.aderenciaDataGridViewTextBoxColumn.HeaderText = "Aderencia";
-            this.aderenciaDataGridViewTextBoxColumn.Name = "aderenciaDataGridViewTextBoxColumn";
-            // 
-            // largadaDataGridViewTextBoxColumn
-            // 
-            this.largadaDataGridViewTextBoxColumn.DataPropertyName = "Largada";
-            this.largadaDataGridViewTextBoxColumn.HeaderText = "Largada";
-            this.largadaDataGridViewTextBoxColumn.Name = "largadaDataGridViewTextBoxColumn";
             // 
             // dadoIndicadorBindingSource
             // 
@@ -960,6 +919,44 @@ namespace DashboardLogistico
             this.label9.TabIndex = 0;
             this.label9.Text = "Hora Máxima Jornada Horas:";
             // 
+            // agrupamentoDataGridViewTextBoxColumn
+            // 
+            this.agrupamentoDataGridViewTextBoxColumn.DataPropertyName = "Agrupamento";
+            this.agrupamentoDataGridViewTextBoxColumn.HeaderText = "Agrupamento";
+            this.agrupamentoDataGridViewTextBoxColumn.Name = "agrupamentoDataGridViewTextBoxColumn";
+            this.agrupamentoDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // transportesDataGridViewTextBoxColumn
+            // 
+            this.transportesDataGridViewTextBoxColumn.DataPropertyName = "Transportes";
+            this.transportesDataGridViewTextBoxColumn.HeaderText = "Transportes";
+            this.transportesDataGridViewTextBoxColumn.Name = "transportesDataGridViewTextBoxColumn";
+            this.transportesDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // homologacaoDataGridViewTextBoxColumn
+            // 
+            this.homologacaoDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.homologacaoDataGridViewTextBoxColumn.DataPropertyName = "Homologacao";
+            this.homologacaoDataGridViewTextBoxColumn.HeaderText = "Homologacao";
+            this.homologacaoDataGridViewTextBoxColumn.Name = "homologacaoDataGridViewTextBoxColumn";
+            this.homologacaoDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // aderenciaDataGridViewTextBoxColumn
+            // 
+            this.aderenciaDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.aderenciaDataGridViewTextBoxColumn.DataPropertyName = "Aderencia";
+            this.aderenciaDataGridViewTextBoxColumn.HeaderText = "Aderencia";
+            this.aderenciaDataGridViewTextBoxColumn.Name = "aderenciaDataGridViewTextBoxColumn";
+            this.aderenciaDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // largadaDataGridViewTextBoxColumn
+            // 
+            this.largadaDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.largadaDataGridViewTextBoxColumn.DataPropertyName = "Largada";
+            this.largadaDataGridViewTextBoxColumn.HeaderText = "Largada";
+            this.largadaDataGridViewTextBoxColumn.Name = "largadaDataGridViewTextBoxColumn";
+            this.largadaDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
             // Dashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -986,7 +983,6 @@ namespace DashboardLogistico
             ((System.ComponentModel.ISupportInitialize)(this.dataJornadaTrabalho)).EndInit();
             this.tabTempoEntrega.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataTempoEntrega)).EndInit();
-            this.tabIndicadores.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataIndicadores)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dadoIndicadorBindingSource)).EndInit();
             this.tabDados.ResumeLayout(false);
@@ -1077,19 +1073,18 @@ namespace DashboardLogistico
         private System.Windows.Forms.DataGridViewTextBoxColumn statusViagemDataGridViewTextBoxColumn;
         private System.Windows.Forms.BindingSource notaFiscalBindingSource;
         private System.Windows.Forms.ToolStripMenuItem carregarIndicadoresToolStripMenuItem;
-        private System.Windows.Forms.TabPage tabIndicadores;
         private System.Windows.Forms.DataGridView dataIndicadores;
-        private System.Windows.Forms.DataGridViewTextBoxColumn agrupamentoDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn transportesDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn homologacaoDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn aderenciaDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn largadaDataGridViewTextBoxColumn;
         private System.Windows.Forms.BindingSource dadoIndicadorBindingSource;
         private System.Windows.Forms.ToolStripMenuItem exportaDadosToolStripMenuItem;
         private System.Windows.Forms.SaveFileDialog saveDados;
         private System.Windows.Forms.ToolStripMenuItem exportaJornadaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exportaTempoEntregaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exportaIndicadoresToolStripMenuItem;
+        private System.Windows.Forms.DataGridViewTextBoxColumn agrupamentoDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn transportesDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn homologacaoDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn aderenciaDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn largadaDataGridViewTextBoxColumn;
     }
 }
 

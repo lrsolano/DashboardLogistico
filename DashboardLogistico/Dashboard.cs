@@ -167,9 +167,17 @@ namespace DashboardLogistico
 
                 string query = QueryGenerator.QueryToDataIndicadores(filtros);
 
-                IEnumerable<DadoIndicador> dadosIndicadores = await repositoryIndicador.GetDadoIndicaodAsync(query);
+                List<DadoIndicador> dadosIndicadores = await repositoryIndicador.GetDadoIndicaodAsync(query);
+
+                DadoIndicador total = new DadoIndicador();
+                total.Agrupamento = "Total";
+                total.Transportes = dadosIndicadores.Sum(d => d.Transportes);
+
+
+                dadosIndicadores.Add(total);
 
                 dataIndicadores.DataSource = dadosIndicadores;
+
                 GC.Collect();
             }
 
@@ -260,7 +268,7 @@ namespace DashboardLogistico
 
                 foreach (string codCliente in codClientesUnicos)
                 {
-                    List<Descarga> descargaCliente = dados.FindAll(d => d.CodCliente == codCliente && d.TempoEntrega > 0);
+                    List<Descarga> descargaCliente = dados.FindAll(d => d.CodCliente == codCliente && d.TempoEntrega > 0.2);
 
                     double avg = 0;
 

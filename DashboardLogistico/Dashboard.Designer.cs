@@ -47,6 +47,10 @@ namespace DashboardLogistico
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.menuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportaDadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportaJornadaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportaTempoEntregaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportaIndicadoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.configuraçãoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.abrirUnidadesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.carregarCSVToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -80,14 +84,15 @@ namespace DashboardLogistico
             this.dataTempoEntrega = new System.Windows.Forms.DataGridView();
             this.tabIndicadores = new System.Windows.Forms.TabPage();
             this.dataIndicadores = new System.Windows.Forms.DataGridView();
+            this.agrupamentoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.transportesDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.homologacaoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.aderenciaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.largadaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dadoIndicadorBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tabDados = new System.Windows.Forms.TabPage();
             this.buttonCarregarDados = new System.Windows.Forms.Button();
             this.dataDados = new System.Windows.Forms.DataGridView();
-            this.tabParametros = new System.Windows.Forms.TabPage();
-            this.maximoTempoDescarga = new System.Windows.Forms.NumericUpDown();
-            this.label10 = new System.Windows.Forms.Label();
-            this.maximoJornada = new System.Windows.Forms.NumericUpDown();
-            this.label9 = new System.Windows.Forms.Label();
             this.codClienteDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clienteDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.enderecoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -120,17 +125,12 @@ namespace DashboardLogistico
             this.seriePernoiteDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.statusViagemDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.notaFiscalBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.dadoIndicadorBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.agrupamentoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.transportesDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.homologacaoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.aderenciaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.largadaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.exportaDadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tabParametros = new System.Windows.Forms.TabPage();
+            this.maximoTempoDescarga = new System.Windows.Forms.NumericUpDown();
+            this.label10 = new System.Windows.Forms.Label();
+            this.maximoJornada = new System.Windows.Forms.NumericUpDown();
+            this.label9 = new System.Windows.Forms.Label();
             this.saveDados = new System.Windows.Forms.SaveFileDialog();
-            this.exportaJornadaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exportaTempoEntregaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exportaIndicadoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             buttonFiltrar = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.graficoBaixa)).BeginInit();
@@ -144,13 +144,13 @@ namespace DashboardLogistico
             ((System.ComponentModel.ISupportInitialize)(this.dataTempoEntrega)).BeginInit();
             this.tabIndicadores.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataIndicadores)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dadoIndicadorBindingSource)).BeginInit();
             this.tabDados.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataDados)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.notaFiscalBindingSource)).BeginInit();
             this.tabParametros.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.maximoTempoDescarga)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.maximoJornada)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.notaFiscalBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dadoIndicadorBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonFiltrar
@@ -191,6 +191,34 @@ namespace DashboardLogistico
             this.menuToolStripMenuItem.Name = "menuToolStripMenuItem";
             this.menuToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
             this.menuToolStripMenuItem.Text = "Menu";
+            // 
+            // exportaDadosToolStripMenuItem
+            // 
+            this.exportaDadosToolStripMenuItem.Name = "exportaDadosToolStripMenuItem";
+            this.exportaDadosToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.exportaDadosToolStripMenuItem.Text = "Exporta Dados";
+            this.exportaDadosToolStripMenuItem.Click += new System.EventHandler(this.exportaDadosToolStripMenuItem_Click);
+            // 
+            // exportaJornadaToolStripMenuItem
+            // 
+            this.exportaJornadaToolStripMenuItem.Name = "exportaJornadaToolStripMenuItem";
+            this.exportaJornadaToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.exportaJornadaToolStripMenuItem.Text = "Exporta Jornada";
+            this.exportaJornadaToolStripMenuItem.Click += new System.EventHandler(this.exportaJornadaToolStripMenuItem_Click);
+            // 
+            // exportaTempoEntregaToolStripMenuItem
+            // 
+            this.exportaTempoEntregaToolStripMenuItem.Name = "exportaTempoEntregaToolStripMenuItem";
+            this.exportaTempoEntregaToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.exportaTempoEntregaToolStripMenuItem.Text = "Exporta Tempo Entrega";
+            this.exportaTempoEntregaToolStripMenuItem.Click += new System.EventHandler(this.exportaTempoEntregaToolStripMenuItem_Click);
+            // 
+            // exportaIndicadoresToolStripMenuItem
+            // 
+            this.exportaIndicadoresToolStripMenuItem.Name = "exportaIndicadoresToolStripMenuItem";
+            this.exportaIndicadoresToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.exportaIndicadoresToolStripMenuItem.Text = "Exporta Indicadores";
+            this.exportaIndicadoresToolStripMenuItem.Click += new System.EventHandler(this.exportaIndicadoresToolStripMenuItem_Click);
             // 
             // configuraçãoToolStripMenuItem
             // 
@@ -578,6 +606,40 @@ namespace DashboardLogistico
             this.dataIndicadores.Size = new System.Drawing.Size(1460, 778);
             this.dataIndicadores.TabIndex = 0;
             // 
+            // agrupamentoDataGridViewTextBoxColumn
+            // 
+            this.agrupamentoDataGridViewTextBoxColumn.DataPropertyName = "Agrupamento";
+            this.agrupamentoDataGridViewTextBoxColumn.HeaderText = "Agrupamento";
+            this.agrupamentoDataGridViewTextBoxColumn.Name = "agrupamentoDataGridViewTextBoxColumn";
+            // 
+            // transportesDataGridViewTextBoxColumn
+            // 
+            this.transportesDataGridViewTextBoxColumn.DataPropertyName = "Transportes";
+            this.transportesDataGridViewTextBoxColumn.HeaderText = "Transportes";
+            this.transportesDataGridViewTextBoxColumn.Name = "transportesDataGridViewTextBoxColumn";
+            // 
+            // homologacaoDataGridViewTextBoxColumn
+            // 
+            this.homologacaoDataGridViewTextBoxColumn.DataPropertyName = "Homologacao";
+            this.homologacaoDataGridViewTextBoxColumn.HeaderText = "Homologacao";
+            this.homologacaoDataGridViewTextBoxColumn.Name = "homologacaoDataGridViewTextBoxColumn";
+            // 
+            // aderenciaDataGridViewTextBoxColumn
+            // 
+            this.aderenciaDataGridViewTextBoxColumn.DataPropertyName = "Aderencia";
+            this.aderenciaDataGridViewTextBoxColumn.HeaderText = "Aderencia";
+            this.aderenciaDataGridViewTextBoxColumn.Name = "aderenciaDataGridViewTextBoxColumn";
+            // 
+            // largadaDataGridViewTextBoxColumn
+            // 
+            this.largadaDataGridViewTextBoxColumn.DataPropertyName = "Largada";
+            this.largadaDataGridViewTextBoxColumn.HeaderText = "Largada";
+            this.largadaDataGridViewTextBoxColumn.Name = "largadaDataGridViewTextBoxColumn";
+            // 
+            // dadoIndicadorBindingSource
+            // 
+            this.dadoIndicadorBindingSource.DataSource = typeof(DashboardLogistico.Core.DadoIndicador);
+            // 
             // tabDados
             // 
             this.tabDados.Controls.Add(this.buttonCarregarDados);
@@ -640,73 +702,6 @@ namespace DashboardLogistico
             this.dataDados.Name = "dataDados";
             this.dataDados.Size = new System.Drawing.Size(1480, 765);
             this.dataDados.TabIndex = 3;
-            // 
-            // tabParametros
-            // 
-            this.tabParametros.Controls.Add(this.maximoTempoDescarga);
-            this.tabParametros.Controls.Add(this.label10);
-            this.tabParametros.Controls.Add(this.maximoJornada);
-            this.tabParametros.Controls.Add(this.label9);
-            this.tabParametros.Location = new System.Drawing.Point(4, 22);
-            this.tabParametros.Name = "tabParametros";
-            this.tabParametros.Size = new System.Drawing.Size(1476, 796);
-            this.tabParametros.TabIndex = 2;
-            this.tabParametros.Text = "Parametros";
-            this.tabParametros.UseVisualStyleBackColor = true;
-            // 
-            // maximoTempoDescarga
-            // 
-            this.maximoTempoDescarga.DecimalPlaces = 1;
-            this.maximoTempoDescarga.Increment = new decimal(new int[] {
-            5,
-            0,
-            0,
-            65536});
-            this.maximoTempoDescarga.Location = new System.Drawing.Point(176, 59);
-            this.maximoTempoDescarga.Maximum = new decimal(new int[] {
-            200,
-            0,
-            0,
-            0});
-            this.maximoTempoDescarga.Name = "maximoTempoDescarga";
-            this.maximoTempoDescarga.Size = new System.Drawing.Size(120, 20);
-            this.maximoTempoDescarga.TabIndex = 3;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(8, 61);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(153, 13);
-            this.label10.TabIndex = 2;
-            this.label10.Text = "Tempo Máximo Entrega Horas:";
-            // 
-            // maximoJornada
-            // 
-            this.maximoJornada.DecimalPlaces = 1;
-            this.maximoJornada.Increment = new decimal(new int[] {
-            5,
-            0,
-            0,
-            65536});
-            this.maximoJornada.Location = new System.Drawing.Point(176, 19);
-            this.maximoJornada.Maximum = new decimal(new int[] {
-            200,
-            0,
-            0,
-            0});
-            this.maximoJornada.Name = "maximoJornada";
-            this.maximoJornada.Size = new System.Drawing.Size(120, 20);
-            this.maximoJornada.TabIndex = 1;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(8, 21);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(144, 13);
-            this.label9.TabIndex = 0;
-            this.label9.Text = "Hora Máxima Jornada Horas:";
             // 
             // codClienteDataGridViewTextBoxColumn
             // 
@@ -898,67 +893,72 @@ namespace DashboardLogistico
             // 
             this.notaFiscalBindingSource.DataSource = typeof(DashboardLogistico.Core.NotaFiscal);
             // 
-            // dadoIndicadorBindingSource
+            // tabParametros
             // 
-            this.dadoIndicadorBindingSource.DataSource = typeof(DashboardLogistico.Core.DadoIndicador);
+            this.tabParametros.Controls.Add(this.maximoTempoDescarga);
+            this.tabParametros.Controls.Add(this.label10);
+            this.tabParametros.Controls.Add(this.maximoJornada);
+            this.tabParametros.Controls.Add(this.label9);
+            this.tabParametros.Location = new System.Drawing.Point(4, 22);
+            this.tabParametros.Name = "tabParametros";
+            this.tabParametros.Size = new System.Drawing.Size(1476, 796);
+            this.tabParametros.TabIndex = 2;
+            this.tabParametros.Text = "Parametros";
+            this.tabParametros.UseVisualStyleBackColor = true;
             // 
-            // agrupamentoDataGridViewTextBoxColumn
+            // maximoTempoDescarga
             // 
-            this.agrupamentoDataGridViewTextBoxColumn.DataPropertyName = "Agrupamento";
-            this.agrupamentoDataGridViewTextBoxColumn.HeaderText = "Agrupamento";
-            this.agrupamentoDataGridViewTextBoxColumn.Name = "agrupamentoDataGridViewTextBoxColumn";
+            this.maximoTempoDescarga.DecimalPlaces = 1;
+            this.maximoTempoDescarga.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            65536});
+            this.maximoTempoDescarga.Location = new System.Drawing.Point(176, 59);
+            this.maximoTempoDescarga.Maximum = new decimal(new int[] {
+            200,
+            0,
+            0,
+            0});
+            this.maximoTempoDescarga.Name = "maximoTempoDescarga";
+            this.maximoTempoDescarga.Size = new System.Drawing.Size(120, 20);
+            this.maximoTempoDescarga.TabIndex = 3;
             // 
-            // transportesDataGridViewTextBoxColumn
+            // label10
             // 
-            this.transportesDataGridViewTextBoxColumn.DataPropertyName = "Transportes";
-            this.transportesDataGridViewTextBoxColumn.HeaderText = "Transportes";
-            this.transportesDataGridViewTextBoxColumn.Name = "transportesDataGridViewTextBoxColumn";
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(8, 61);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(153, 13);
+            this.label10.TabIndex = 2;
+            this.label10.Text = "Tempo Máximo Entrega Horas:";
             // 
-            // homologacaoDataGridViewTextBoxColumn
+            // maximoJornada
             // 
-            this.homologacaoDataGridViewTextBoxColumn.DataPropertyName = "Homologacao";
-            this.homologacaoDataGridViewTextBoxColumn.HeaderText = "Homologacao";
-            this.homologacaoDataGridViewTextBoxColumn.Name = "homologacaoDataGridViewTextBoxColumn";
+            this.maximoJornada.DecimalPlaces = 1;
+            this.maximoJornada.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            65536});
+            this.maximoJornada.Location = new System.Drawing.Point(176, 19);
+            this.maximoJornada.Maximum = new decimal(new int[] {
+            200,
+            0,
+            0,
+            0});
+            this.maximoJornada.Name = "maximoJornada";
+            this.maximoJornada.Size = new System.Drawing.Size(120, 20);
+            this.maximoJornada.TabIndex = 1;
             // 
-            // aderenciaDataGridViewTextBoxColumn
+            // label9
             // 
-            this.aderenciaDataGridViewTextBoxColumn.DataPropertyName = "Aderencia";
-            this.aderenciaDataGridViewTextBoxColumn.HeaderText = "Aderencia";
-            this.aderenciaDataGridViewTextBoxColumn.Name = "aderenciaDataGridViewTextBoxColumn";
-            // 
-            // largadaDataGridViewTextBoxColumn
-            // 
-            this.largadaDataGridViewTextBoxColumn.DataPropertyName = "Largada";
-            this.largadaDataGridViewTextBoxColumn.HeaderText = "Largada";
-            this.largadaDataGridViewTextBoxColumn.Name = "largadaDataGridViewTextBoxColumn";
-            // 
-            // exportaDadosToolStripMenuItem
-            // 
-            this.exportaDadosToolStripMenuItem.Name = "exportaDadosToolStripMenuItem";
-            this.exportaDadosToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
-            this.exportaDadosToolStripMenuItem.Text = "Exporta Dados";
-            this.exportaDadosToolStripMenuItem.Click += new System.EventHandler(this.exportaDadosToolStripMenuItem_Click);
-            // 
-            // exportaJornadaToolStripMenuItem
-            // 
-            this.exportaJornadaToolStripMenuItem.Name = "exportaJornadaToolStripMenuItem";
-            this.exportaJornadaToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
-            this.exportaJornadaToolStripMenuItem.Text = "Exporta Jornada";
-            this.exportaJornadaToolStripMenuItem.Click += new System.EventHandler(this.exportaJornadaToolStripMenuItem_Click);
-            // 
-            // exportaTempoEntregaToolStripMenuItem
-            // 
-            this.exportaTempoEntregaToolStripMenuItem.Name = "exportaTempoEntregaToolStripMenuItem";
-            this.exportaTempoEntregaToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
-            this.exportaTempoEntregaToolStripMenuItem.Text = "Exporta Tempo Entrega";
-            this.exportaTempoEntregaToolStripMenuItem.Click += new System.EventHandler(this.exportaTempoEntregaToolStripMenuItem_Click);
-            // 
-            // exportaIndicadoresToolStripMenuItem
-            // 
-            this.exportaIndicadoresToolStripMenuItem.Name = "exportaIndicadoresToolStripMenuItem";
-            this.exportaIndicadoresToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
-            this.exportaIndicadoresToolStripMenuItem.Text = "Exporta Indicadores";
-            this.exportaIndicadoresToolStripMenuItem.Click += new System.EventHandler(this.exportaIndicadoresToolStripMenuItem_Click);
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(8, 21);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(144, 13);
+            this.label9.TabIndex = 0;
+            this.label9.Text = "Hora Máxima Jornada Horas:";
             // 
             // Dashboard
             // 
@@ -988,14 +988,14 @@ namespace DashboardLogistico
             ((System.ComponentModel.ISupportInitialize)(this.dataTempoEntrega)).EndInit();
             this.tabIndicadores.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataIndicadores)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dadoIndicadorBindingSource)).EndInit();
             this.tabDados.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataDados)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.notaFiscalBindingSource)).EndInit();
             this.tabParametros.ResumeLayout(false);
             this.tabParametros.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.maximoTempoDescarga)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.maximoJornada)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.notaFiscalBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dadoIndicadorBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -98,7 +98,7 @@ namespace DashboardLogistico.Data
 
                     cmd.ExecuteNonQuery();
 
-                    cmd.CommandText = @"INSER INT Unidades (Unidade, HoraLargada) VALUES ('Exemplo', '10:00');";
+                    cmd.CommandText = @"INSERT INTO Unidades (Unidade, HoraLargada) VALUES ('Exemplo', '10:00');";
 
                     cmd.ExecuteNonQuery();
 
@@ -483,6 +483,33 @@ namespace DashboardLogistico.Data
                     indicador.Homologacao = Math.Round(Convert.ToDouble(rdr["Homologacao"]), 2);
                     indicador.Largada = Math.Round(Convert.ToDouble(rdr["Largada"]), 2);
                     indicador.Transportes = Convert.ToInt64(rdr["Transportes"]);
+
+                    indicadores.Add(indicador);
+                }
+            }
+
+            sqliteConnection.Close();
+
+            return indicadores;
+        }
+        internal async Task<List<DTOChart>> GetIndicadordAsync(string query)
+        {
+            List<DTOChart> indicadores = new List<DTOChart>();
+
+            await sqliteConnection.OpenAsync();
+
+            using (var cmd = sqliteConnection.CreateCommand())
+            {
+                cmd.CommandText = query;
+
+                var rdr = await cmd.ExecuteReaderAsync();
+
+                while (await rdr.ReadAsync())
+                {
+                    DTOChart indicador = new DTOChart();
+                    indicador.Agrupamento = rdr["Agrupamento"].ToString();
+                    indicador.MesAno = rdr["dataInicio"].ToString();
+                    indicador.Valor = Math.Round(Convert.ToDouble(rdr["Valor"]), 2);
 
                     indicadores.Add(indicador);
                 }

@@ -160,10 +160,15 @@ namespace DashboardLogistico
             {
                 filter_SelectedIndexChanged(sender, e);
 
+                string queryBaixa = QueryGenerator.QueryToHomologacao(filtros);
+                await Calculadora.LoadChart(repositoryIndicador, filtros, graficoBaixa, queryBaixa);
 
-                await Calculadora.LoadHomologacao(repositoryNota, filtros, graficoBaixa);
-                await Calculadora.LoadAderencia(repositoryNota, filtros, graficoAderencia);
-                await Calculadora.LoadLargada(repositoryNota, filtros, graficoLargada);
+                string queryAderencia = QueryGenerator.QueryToAderencia(filtros);
+                await Calculadora.LoadChart(repositoryIndicador, filtros, graficoAderencia, queryAderencia);
+
+                string queryLargada = QueryGenerator.QueryToLargada(filtros);
+                await Calculadora.LoadChart(repositoryIndicador, filtros, graficoLargada, queryLargada);
+
 
                 string query = QueryGenerator.QueryToDataIndicadores(filtros);
 

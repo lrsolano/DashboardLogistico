@@ -44,6 +44,7 @@
     <Compile Include="Exceptions\NotaFiscalRepositoryException.cs" />
     <Compile Include="Models\ConfigGlobal.cs" />
     <Compile Include="Models\DadoIndicador.cs" />
+    <Compile Include="Models\DTOChart.cs" />
     <Compile Include="Models\Filtros.cs" />
     <Compile Include="Models\Descarga.cs" />
     <Compile Include="Models\Indicador.cs" />

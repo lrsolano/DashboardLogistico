@@ -9,19 +9,6 @@ namespace DashboardLogistico.Data
 {
     public static class QueryGenerator
     {
-        public static string QueryToHomologacao(Filtros filtros)
-        {
-            StringBuilder query = new StringBuilder();
-
-            query.Append("SELECT ");
-            query.Append($"{filtros.Group}, strftime('%m-%Y', data) dataInicio, ");
-            query.Append(@"avg(Homologacao) Homologacao FROM Indicadores ");
-            query.Append(GenerateWhereIndicadores(filtros));
-            query.Append($" group by {filtros.Group}, dataInicio;");
-
-            return query.ToString();
-        }
-
         public static string QueryToDataIndicadores(Filtros filtros)
         {
             StringBuilder query = new StringBuilder();
@@ -30,20 +17,33 @@ namespace DashboardLogistico.Data
             query.Append($"{filtros.Group} Agrupamento, ");
             query.Append(@" avg(Aderencia) Aderencia, avg(Homologacao) Homologacao, avg(Largada) Largada, count(identificador) Transportes  FROM Indicadores ");
             query.Append(GenerateWhereIndicadores(filtros));
-            query.Append($" group by {filtros.Group}; ");
+            query.Append($" group by {filtros.Group} order by data; ");
 
             return query.ToString();
         }
 
-        public static string QueryAderencia(Filtros filtros)
+        public static string QueryToHomologacao(Filtros filtros)
         {
             StringBuilder query = new StringBuilder();
 
             query.Append("SELECT ");
-            query.Append($"{filtros.Group}, strftime('%m-%Y', data) dataInicio, ");
-            query.Append(@"avg(Aderencia) Aderencia FROM Indicadores ");
+            query.Append($"{filtros.Group} Agrupamento, strftime('%m-%Y', data) dataInicio, ");
+            query.Append(@"avg(Homologacao) Valor FROM Indicadores ");
             query.Append(GenerateWhereIndicadores(filtros));
-            query.Append($" group by {filtros.Group}, dataInicio;");
+            query.Append($" group by {filtros.Group}, dataInicio order by data;");
+
+            return query.ToString();
+        }
+
+        public static string QueryToAderencia(Filtros filtros)
+        {
+            StringBuilder query = new StringBuilder();
+
+            query.Append("SELECT ");
+            query.Append($"{filtros.Group} Agrupamento, strftime('%m-%Y', data) dataInicio, ");
+            query.Append(@"avg(Aderencia) Valor FROM Indicadores ");
+            query.Append(GenerateWhereIndicadores(filtros));
+            query.Append($" group by {filtros.Group}, dataInicio order by data;");
 
             return query.ToString();
         }
@@ -53,10 +53,10 @@ namespace DashboardLogistico.Data
             StringBuilder query = new StringBuilder();
 
             query.Append("SELECT ");
-            query.Append($"{filtros.Group}, strftime('%m-%Y', data) dataInicio, ");
-            query.Append(@"avg(Largada) Largada FROM Indicadores ");
+            query.Append($"{filtros.Group} Agrupamento, strftime('%m-%Y', data) dataInicio, ");
+            query.Append(@"avg(Largada) Valor FROM Indicadores ");
             query.Append(GenerateWhereIndicadores(filtros));
-            query.Append($" group by {filtros.Group}, dataInicio;");
+            query.Append($" group by {filtros.Group}, dataInicio order by data;");
 
             return query.ToString();
         }

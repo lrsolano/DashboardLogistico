@@ -58,6 +58,13 @@ namespace DashboardLogistico
             this.graficoBaixa = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabFiltros = new System.Windows.Forms.TabPage();
+            this.dataIndicadores = new System.Windows.Forms.DataGridView();
+            this.agrupamentoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.transportesDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.homologacaoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.aderenciaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.largadaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dadoIndicadorBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.graficoLargada = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.graficoAderencia = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.dateFinal = new System.Windows.Forms.DateTimePicker();
@@ -82,8 +89,6 @@ namespace DashboardLogistico
             this.tabTempoEntrega = new System.Windows.Forms.TabPage();
             this.buttonTempoEntrega = new System.Windows.Forms.Button();
             this.dataTempoEntrega = new System.Windows.Forms.DataGridView();
-            this.dataIndicadores = new System.Windows.Forms.DataGridView();
-            this.dadoIndicadorBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tabDados = new System.Windows.Forms.TabPage();
             this.buttonCarregarDados = new System.Windows.Forms.Button();
             this.dataDados = new System.Windows.Forms.DataGridView();
@@ -125,24 +130,19 @@ namespace DashboardLogistico
             this.maximoJornada = new System.Windows.Forms.NumericUpDown();
             this.label9 = new System.Windows.Forms.Label();
             this.saveDados = new System.Windows.Forms.SaveFileDialog();
-            this.agrupamentoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.transportesDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.homologacaoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.aderenciaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.largadaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             buttonFiltrar = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.graficoBaixa)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabFiltros.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataIndicadores)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dadoIndicadorBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.graficoLargada)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.graficoAderencia)).BeginInit();
             this.tabJornada.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataJornadaTrabalho)).BeginInit();
             this.tabTempoEntrega.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataTempoEntrega)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataIndicadores)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dadoIndicadorBindingSource)).BeginInit();
             this.tabDados.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataDados)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.notaFiscalBindingSource)).BeginInit();
@@ -153,9 +153,9 @@ namespace DashboardLogistico
             // 
             // buttonFiltrar
             // 
-            buttonFiltrar.Location = new System.Drawing.Point(1306, 6);
+            buttonFiltrar.Location = new System.Drawing.Point(1284, 6);
             buttonFiltrar.Name = "buttonFiltrar";
-            buttonFiltrar.Size = new System.Drawing.Size(126, 21);
+            buttonFiltrar.Size = new System.Drawing.Size(64, 21);
             buttonFiltrar.TabIndex = 17;
             buttonFiltrar.Text = "Filtrar";
             buttonFiltrar.UseVisualStyleBackColor = true;
@@ -175,7 +175,7 @@ namespace DashboardLogistico
             this.configuraçãoToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1484, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1374, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -274,7 +274,7 @@ namespace DashboardLogistico
             series1.Legend = "Legend1";
             series1.Name = "Series1";
             this.graficoBaixa.Series.Add(series1);
-            this.graficoBaixa.Size = new System.Drawing.Size(1021, 211);
+            this.graficoBaixa.Size = new System.Drawing.Size(978, 170);
             this.graficoBaixa.TabIndex = 2;
             this.graficoBaixa.Text = "chart1";
             title1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
@@ -289,10 +289,10 @@ namespace DashboardLogistico
             this.tabControl1.Controls.Add(this.tabTempoEntrega);
             this.tabControl1.Controls.Add(this.tabDados);
             this.tabControl1.Controls.Add(this.tabParametros);
-            this.tabControl1.Location = new System.Drawing.Point(0, 27);
+            this.tabControl1.Location = new System.Drawing.Point(12, 27);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1484, 822);
+            this.tabControl1.Size = new System.Drawing.Size(1362, 677);
             this.tabControl1.TabIndex = 3;
             // 
             // tabFiltros
@@ -321,10 +321,69 @@ namespace DashboardLogistico
             this.tabFiltros.Location = new System.Drawing.Point(4, 22);
             this.tabFiltros.Name = "tabFiltros";
             this.tabFiltros.Padding = new System.Windows.Forms.Padding(3);
-            this.tabFiltros.Size = new System.Drawing.Size(1476, 796);
+            this.tabFiltros.Size = new System.Drawing.Size(1354, 651);
             this.tabFiltros.TabIndex = 0;
             this.tabFiltros.Text = "Principal";
             this.tabFiltros.UseVisualStyleBackColor = true;
+            // 
+            // dataIndicadores
+            // 
+            this.dataIndicadores.AutoGenerateColumns = false;
+            this.dataIndicadores.BackgroundColor = System.Drawing.Color.White;
+            this.dataIndicadores.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataIndicadores.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.agrupamentoDataGridViewTextBoxColumn,
+            this.transportesDataGridViewTextBoxColumn,
+            this.homologacaoDataGridViewTextBoxColumn,
+            this.aderenciaDataGridViewTextBoxColumn,
+            this.largadaDataGridViewTextBoxColumn});
+            this.dataIndicadores.DataSource = this.dadoIndicadorBindingSource;
+            this.dataIndicadores.Location = new System.Drawing.Point(982, 71);
+            this.dataIndicadores.Name = "dataIndicadores";
+            this.dataIndicadores.Size = new System.Drawing.Size(372, 568);
+            this.dataIndicadores.TabIndex = 0;
+            // 
+            // agrupamentoDataGridViewTextBoxColumn
+            // 
+            this.agrupamentoDataGridViewTextBoxColumn.DataPropertyName = "Agrupamento";
+            this.agrupamentoDataGridViewTextBoxColumn.HeaderText = "Agrupamento";
+            this.agrupamentoDataGridViewTextBoxColumn.Name = "agrupamentoDataGridViewTextBoxColumn";
+            this.agrupamentoDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // transportesDataGridViewTextBoxColumn
+            // 
+            this.transportesDataGridViewTextBoxColumn.DataPropertyName = "Transportes";
+            this.transportesDataGridViewTextBoxColumn.HeaderText = "Transportes";
+            this.transportesDataGridViewTextBoxColumn.Name = "transportesDataGridViewTextBoxColumn";
+            this.transportesDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // homologacaoDataGridViewTextBoxColumn
+            // 
+            this.homologacaoDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.homologacaoDataGridViewTextBoxColumn.DataPropertyName = "Homologacao";
+            this.homologacaoDataGridViewTextBoxColumn.HeaderText = "Homologacao";
+            this.homologacaoDataGridViewTextBoxColumn.Name = "homologacaoDataGridViewTextBoxColumn";
+            this.homologacaoDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // aderenciaDataGridViewTextBoxColumn
+            // 
+            this.aderenciaDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.aderenciaDataGridViewTextBoxColumn.DataPropertyName = "Aderencia";
+            this.aderenciaDataGridViewTextBoxColumn.HeaderText = "Aderencia";
+            this.aderenciaDataGridViewTextBoxColumn.Name = "aderenciaDataGridViewTextBoxColumn";
+            this.aderenciaDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // largadaDataGridViewTextBoxColumn
+            // 
+            this.largadaDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.largadaDataGridViewTextBoxColumn.DataPropertyName = "Largada";
+            this.largadaDataGridViewTextBoxColumn.HeaderText = "Largada";
+            this.largadaDataGridViewTextBoxColumn.Name = "largadaDataGridViewTextBoxColumn";
+            this.largadaDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // dadoIndicadorBindingSource
+            // 
+            this.dadoIndicadorBindingSource.DataSource = typeof(DashboardLogistico.Core.DadoIndicador);
             // 
             // graficoLargada
             // 
@@ -336,13 +395,13 @@ namespace DashboardLogistico
             this.graficoLargada.ChartAreas.Add(chartArea2);
             legend2.Name = "Legend1";
             this.graficoLargada.Legends.Add(legend2);
-            this.graficoLargada.Location = new System.Drawing.Point(10, 278);
+            this.graficoLargada.Location = new System.Drawing.Point(10, 264);
             this.graficoLargada.Name = "graficoLargada";
             series2.ChartArea = "ChartArea1";
             series2.Legend = "Legend1";
             series2.Name = "Series1";
             this.graficoLargada.Series.Add(series2);
-            this.graficoLargada.Size = new System.Drawing.Size(1021, 211);
+            this.graficoLargada.Size = new System.Drawing.Size(978, 170);
             this.graficoLargada.TabIndex = 19;
             this.graficoLargada.Text = "chart2";
             title2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
@@ -361,13 +420,13 @@ namespace DashboardLogistico
             this.graficoAderencia.ChartAreas.Add(chartArea3);
             legend3.Name = "Legend1";
             this.graficoAderencia.Legends.Add(legend3);
-            this.graficoAderencia.Location = new System.Drawing.Point(10, 504);
+            this.graficoAderencia.Location = new System.Drawing.Point(10, 469);
             this.graficoAderencia.Name = "graficoAderencia";
             series3.ChartArea = "ChartArea1";
             series3.Legend = "Legend1";
             series3.Name = "Series1";
             this.graficoAderencia.Series.Add(series3);
-            this.graficoAderencia.Size = new System.Drawing.Size(1021, 211);
+            this.graficoAderencia.Size = new System.Drawing.Size(978, 170);
             this.graficoAderencia.TabIndex = 18;
             this.graficoAderencia.Text = "chart1";
             title3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
@@ -379,7 +438,7 @@ namespace DashboardLogistico
             // 
             this.dateFinal.Location = new System.Drawing.Point(417, 45);
             this.dateFinal.Name = "dateFinal";
-            this.dateFinal.Size = new System.Drawing.Size(200, 20);
+            this.dateFinal.Size = new System.Drawing.Size(222, 20);
             this.dateFinal.TabIndex = 16;
             // 
             // label8
@@ -395,7 +454,7 @@ namespace DashboardLogistico
             // 
             this.dateInicial.Location = new System.Drawing.Point(81, 44);
             this.dateInicial.Name = "dateInicial";
-            this.dateInicial.Size = new System.Drawing.Size(200, 20);
+            this.dateInicial.Size = new System.Drawing.Size(227, 20);
             this.dateInicial.TabIndex = 14;
             // 
             // label7
@@ -526,7 +585,7 @@ namespace DashboardLogistico
             this.tabJornada.Location = new System.Drawing.Point(4, 22);
             this.tabJornada.Name = "tabJornada";
             this.tabJornada.Padding = new System.Windows.Forms.Padding(3);
-            this.tabJornada.Size = new System.Drawing.Size(1476, 796);
+            this.tabJornada.Size = new System.Drawing.Size(1354, 651);
             this.tabJornada.TabIndex = 1;
             this.tabJornada.Text = "Jornada de Trabalho";
             this.tabJornada.UseVisualStyleBackColor = true;
@@ -544,9 +603,9 @@ namespace DashboardLogistico
             // dataJornadaTrabalho
             // 
             this.dataJornadaTrabalho.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataJornadaTrabalho.Location = new System.Drawing.Point(-4, 35);
+            this.dataJornadaTrabalho.Location = new System.Drawing.Point(3, 35);
             this.dataJornadaTrabalho.Name = "dataJornadaTrabalho";
-            this.dataJornadaTrabalho.Size = new System.Drawing.Size(1480, 765);
+            this.dataJornadaTrabalho.Size = new System.Drawing.Size(1351, 613);
             this.dataJornadaTrabalho.TabIndex = 0;
             // 
             // tabTempoEntrega
@@ -555,7 +614,7 @@ namespace DashboardLogistico
             this.tabTempoEntrega.Controls.Add(this.dataTempoEntrega);
             this.tabTempoEntrega.Location = new System.Drawing.Point(4, 22);
             this.tabTempoEntrega.Name = "tabTempoEntrega";
-            this.tabTempoEntrega.Size = new System.Drawing.Size(1476, 796);
+            this.tabTempoEntrega.Size = new System.Drawing.Size(1354, 651);
             this.tabTempoEntrega.TabIndex = 3;
             this.tabTempoEntrega.Text = "Tempo de Entrega";
             this.tabTempoEntrega.UseVisualStyleBackColor = true;
@@ -573,31 +632,10 @@ namespace DashboardLogistico
             // dataTempoEntrega
             // 
             this.dataTempoEntrega.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataTempoEntrega.Location = new System.Drawing.Point(-4, 35);
+            this.dataTempoEntrega.Location = new System.Drawing.Point(0, 24);
             this.dataTempoEntrega.Name = "dataTempoEntrega";
-            this.dataTempoEntrega.Size = new System.Drawing.Size(1480, 765);
+            this.dataTempoEntrega.Size = new System.Drawing.Size(1354, 627);
             this.dataTempoEntrega.TabIndex = 1;
-            // 
-            // dataIndicadores
-            // 
-            this.dataIndicadores.AutoGenerateColumns = false;
-            this.dataIndicadores.BackgroundColor = System.Drawing.Color.White;
-            this.dataIndicadores.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataIndicadores.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.agrupamentoDataGridViewTextBoxColumn,
-            this.transportesDataGridViewTextBoxColumn,
-            this.homologacaoDataGridViewTextBoxColumn,
-            this.aderenciaDataGridViewTextBoxColumn,
-            this.largadaDataGridViewTextBoxColumn});
-            this.dataIndicadores.DataSource = this.dadoIndicadorBindingSource;
-            this.dataIndicadores.Location = new System.Drawing.Point(994, 71);
-            this.dataIndicadores.Name = "dataIndicadores";
-            this.dataIndicadores.Size = new System.Drawing.Size(474, 629);
-            this.dataIndicadores.TabIndex = 0;
-            // 
-            // dadoIndicadorBindingSource
-            // 
-            this.dadoIndicadorBindingSource.DataSource = typeof(DashboardLogistico.Core.DadoIndicador);
             // 
             // tabDados
             // 
@@ -605,7 +643,7 @@ namespace DashboardLogistico
             this.tabDados.Controls.Add(this.dataDados);
             this.tabDados.Location = new System.Drawing.Point(4, 22);
             this.tabDados.Name = "tabDados";
-            this.tabDados.Size = new System.Drawing.Size(1476, 796);
+            this.tabDados.Size = new System.Drawing.Size(1354, 651);
             this.tabDados.TabIndex = 4;
             this.tabDados.Text = "Dados";
             this.tabDados.UseVisualStyleBackColor = true;
@@ -657,9 +695,9 @@ namespace DashboardLogistico
             this.seriePernoiteDataGridViewTextBoxColumn,
             this.statusViagemDataGridViewTextBoxColumn});
             this.dataDados.DataSource = this.notaFiscalBindingSource;
-            this.dataDados.Location = new System.Drawing.Point(-2, 30);
+            this.dataDados.Location = new System.Drawing.Point(3, 30);
             this.dataDados.Name = "dataDados";
-            this.dataDados.Size = new System.Drawing.Size(1480, 765);
+            this.dataDados.Size = new System.Drawing.Size(1351, 621);
             this.dataDados.TabIndex = 3;
             // 
             // codClienteDataGridViewTextBoxColumn
@@ -860,7 +898,7 @@ namespace DashboardLogistico
             this.tabParametros.Controls.Add(this.label9);
             this.tabParametros.Location = new System.Drawing.Point(4, 22);
             this.tabParametros.Name = "tabParametros";
-            this.tabParametros.Size = new System.Drawing.Size(1476, 796);
+            this.tabParametros.Size = new System.Drawing.Size(1354, 651);
             this.tabParametros.TabIndex = 2;
             this.tabParametros.Text = "Parametros";
             this.tabParametros.UseVisualStyleBackColor = true;
@@ -919,49 +957,11 @@ namespace DashboardLogistico
             this.label9.TabIndex = 0;
             this.label9.Text = "Hora Máxima Jornada Horas:";
             // 
-            // agrupamentoDataGridViewTextBoxColumn
-            // 
-            this.agrupamentoDataGridViewTextBoxColumn.DataPropertyName = "Agrupamento";
-            this.agrupamentoDataGridViewTextBoxColumn.HeaderText = "Agrupamento";
-            this.agrupamentoDataGridViewTextBoxColumn.Name = "agrupamentoDataGridViewTextBoxColumn";
-            this.agrupamentoDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // transportesDataGridViewTextBoxColumn
-            // 
-            this.transportesDataGridViewTextBoxColumn.DataPropertyName = "Transportes";
-            this.transportesDataGridViewTextBoxColumn.HeaderText = "Transportes";
-            this.transportesDataGridViewTextBoxColumn.Name = "transportesDataGridViewTextBoxColumn";
-            this.transportesDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // homologacaoDataGridViewTextBoxColumn
-            // 
-            this.homologacaoDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.homologacaoDataGridViewTextBoxColumn.DataPropertyName = "Homologacao";
-            this.homologacaoDataGridViewTextBoxColumn.HeaderText = "Homologacao";
-            this.homologacaoDataGridViewTextBoxColumn.Name = "homologacaoDataGridViewTextBoxColumn";
-            this.homologacaoDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // aderenciaDataGridViewTextBoxColumn
-            // 
-            this.aderenciaDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.aderenciaDataGridViewTextBoxColumn.DataPropertyName = "Aderencia";
-            this.aderenciaDataGridViewTextBoxColumn.HeaderText = "Aderencia";
-            this.aderenciaDataGridViewTextBoxColumn.Name = "aderenciaDataGridViewTextBoxColumn";
-            this.aderenciaDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // largadaDataGridViewTextBoxColumn
-            // 
-            this.largadaDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.largadaDataGridViewTextBoxColumn.DataPropertyName = "Largada";
-            this.largadaDataGridViewTextBoxColumn.HeaderText = "Largada";
-            this.largadaDataGridViewTextBoxColumn.Name = "largadaDataGridViewTextBoxColumn";
-            this.largadaDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
             // Dashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1484, 861);
+            this.ClientSize = new System.Drawing.Size(1374, 700);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.progressBar);
             this.Controls.Add(this.menuStrip1);
@@ -977,14 +977,14 @@ namespace DashboardLogistico
             this.tabControl1.ResumeLayout(false);
             this.tabFiltros.ResumeLayout(false);
             this.tabFiltros.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataIndicadores)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dadoIndicadorBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.graficoLargada)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.graficoAderencia)).EndInit();
             this.tabJornada.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataJornadaTrabalho)).EndInit();
             this.tabTempoEntrega.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataTempoEntrega)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataIndicadores)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dadoIndicadorBindingSource)).EndInit();
             this.tabDados.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataDados)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.notaFiscalBindingSource)).EndInit();

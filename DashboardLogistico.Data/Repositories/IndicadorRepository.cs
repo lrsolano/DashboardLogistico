@@ -103,5 +103,10 @@ namespace DashboardLogistico.Data
 
             return indicador;
         }
+
+        public async Task<List<DTOChart>> GetIndicadordAsync(string query)
+        {
+            return await _dbConnection.GetIndicadordAsync(query);
+        }
     }
 }

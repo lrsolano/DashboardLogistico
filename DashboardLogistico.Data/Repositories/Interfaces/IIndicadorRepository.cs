@@ -14,5 +14,7 @@ namespace DashboardLogistico.Data
         Task<IEnumerable<Indicador>> GetIndicadoresCSVAsync(string caminho, IProgress<Indicador> reportadorDeProgresso, CancellationToken ct);
         Task<Dictionary<string, List<object>>> RunQueryAsync(string query);
         Task<List<DadoIndicador>> GetDadoIndicaodAsync(string query);
+
+        Task<List<DTOChart>> GetIndicadordAsync(string query);
     }
 }

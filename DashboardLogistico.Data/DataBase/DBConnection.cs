@@ -269,6 +269,7 @@ namespace DashboardLogistico.Data
 
             using (var cmd = sqliteConnection.CreateCommand())
             {
+
                 cmd.CommandText = $@"SELECT COUNT(*) FROM Notas WHERE Entrega in ('${string.Join("','", notas)}')";
 
                 var rdr = await cmd.ExecuteReaderAsync();

@@ -34,7 +34,7 @@ namespace DashboardLogistico.Data
 
             IEnumerable<string> entregas = notas.Select(n => n.Entrega).Distinct();
 
-            if (await _dbConnection.VerifyIfNotasExist(entregas)) throw new NotaFiscalRepositoryException("Uma ou mais Notas já existem no banco de dados");
+            //if (await _dbConnection.VerifyIfNotasExist(entregas)) throw new NotaFiscalRepositoryException("Uma ou mais Notas já existem no banco de dados");
 
             await _dbConnection.sqliteConnection.OpenAsync();
 

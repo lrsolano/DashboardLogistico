@@ -26,7 +26,7 @@ namespace DashboardLogistico.Data
 
             IEnumerable<string> entregas = indicadores.Select(n => n.Identificador).Distinct();
 
-            if (await _dbConnection.VerifyIfIndicadorExist(entregas)) throw new NotaFiscalRepositoryException("Uma ou mais indicadores já existem no banco de dados");
+            //if (await _dbConnection.VerifyIfIndicadorExist(entregas)) throw new NotaFiscalRepositoryException("Uma ou mais indicadores já existem no banco de dados");
 
             await _dbConnection.sqliteConnection.OpenAsync();
 

@@ -47,6 +47,7 @@ namespace DashboardLogistico
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.StackTrace, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
 
@@ -276,27 +277,51 @@ namespace DashboardLogistico
                     List<Descarga> descargaCliente = dados.FindAll(d => d.CodCliente == codCliente && d.TempoEntrega > 0.2);
 
                     double avg = 0;
+                    double avgInterna = 0;
 
                     int row = dataTempoEntrega.Rows.Add();
 
-                    if (descargaCliente.Count > 0) avg = descargaCliente.Average(d => d.TempoEntrega);
+                    if (descargaCliente.Count > 0)
+                    {
+                        avg = descargaCliente.Average(d => d.TempoEntrega);
+                    }
+
+                    if(descargaCliente.Count > 3)
+                    {
+                        var descargaInterna = descargaCliente.OrderBy(m => m.TempoEntrega).Skip(1).Take(descargaCliente.Count - 2);
+                        avgInterna = descargaInterna.Average(d => d.TempoEntrega);
+                    }
+                    else
+                    {
+                        avgInterna = avg;
+                    }
+
+                    
 
 
+                    TimeSpan tempo = TimeSpan.FromHours(avg);
+                    TimeSpan tempo1 = TimeSpan.FromMinutes(avg);
 
                     dataTempoEntrega.Rows[row].Cells["Cliente"].Value = dados.Find(d => d.CodCliente == codCliente).Cliente;
                     dataTempoEntrega.Rows[row].Cells["Cod Cliente"].Value = codCliente;
-                    dataTempoEntrega.Rows[row].Cells["Media"].Value = TimeSpan.FromHours(avg).ToString("hh\\:mm");
+                    dataTempoEntrega.Rows[row].Cells["Media"].Value = TimeSpan.FromHours(avg).ToString(@"dd\.hh\:mm");
+                    dataTempoEntrega.Rows[row].Cells["Media Interna"].Value = TimeSpan.FromHours(avgInterna).ToString(@"dd\.hh\:mm"); 
 
                     if (avg > (double)maximoTempoDescarga.Value)
                     {
                         dataTempoEntrega.Rows[row].Cells["Media"].Style.ForeColor = Color.Red;
                     }
 
+                    if (avgInterna > (double)maximoTempoDescarga.Value)
+                    {
+                        dataTempoEntrega.Rows[row].Cells["Media Interna"].Style.ForeColor = Color.Red;
+                    }
+
                     foreach (Descarga descarga in descargaCliente)
                     {
                         TimeSpan timeSpan = TimeSpan.FromHours(descarga.TempoEntrega);
 
-                        dataTempoEntrega.Rows[row].Cells[descarga.DiaViagem].Value = timeSpan.ToString("hh\\:mm");
+                        dataTempoEntrega.Rows[row].Cells[descarga.DiaViagem].Value = timeSpan;
 
                         if (timeSpan.TotalHours > (double)maximoTempoDescarga.Value)
                         {
@@ -324,6 +349,7 @@ namespace DashboardLogistico
             dataTempoEntrega.Columns.Add("Cod Cliente", "Cod Cliente");
             dataTempoEntrega.Columns.Add("Cliente", "Cliente");
             dataTempoEntrega.Columns.Add("Media", "Media");
+            dataTempoEntrega.Columns.Add("Media Interna", "Media Interna");
             foreach (DateTime data in datasUnicas)
             {
                 dataTempoEntrega.Columns.Add(data.ToString("dd-MM-yyyy"), data.ToString("dd-MM-yyyy"));
@@ -450,7 +476,7 @@ namespace DashboardLogistico
                     cabecalho += dataGridView.Columns[i - 1].HeaderText + ";";
                 }
                 writer.WriteLine(cabecalho);
-                for (int i = 0; i < dataGridView.Rows.Count - 1; i++)
+                for (int i = 0; i < dataGridView.Rows.Count; i++)
                 {
                     string linha = "";
                     for (int j = 0; j < dataGridView.Columns.Count; j++)
@@ -463,6 +489,10 @@ namespace DashboardLogistico
                 //fecha o escrito e o stream
                 writer.Close();
 
+                writer.Dispose();
+
+                fs.Dispose();
+
                 GC.Collect();
 
                 MessageBox.Show("Documento Criado");
@@ -472,6 +502,9 @@ namespace DashboardLogistico
                 //exibe mensagem informando que a operação foi cancelada
                 MessageBox.Show("Operação cancelada");
             }
+
+            GC.Collect();
+
         }
 
     }

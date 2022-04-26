@@ -109,7 +109,7 @@ namespace DashboardLogistico
             {
                 IProgress<NotaFiscal> progress = new Progress<NotaFiscal>();
 
-                var novasNotas = await _repositoryNota.GetNotasCSVAsync(caminho, progress, CancellationToken.None);
+                List<NotaFiscal> novasNotas = (await _repositoryNota.GetNotasCSVAsync(caminho, progress, CancellationToken.None)).ToList();
 
                 progressBarCSV.Maximum = novasNotas.Count();
 

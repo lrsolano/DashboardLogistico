@@ -24,9 +24,7 @@ namespace DashboardLogistico.Data
         public async Task<IEnumerable<bool>> SaveIndicadoresAsync(IEnumerable<Indicador> indicadores, IProgress<Indicador> reportadorDeProgresso, CancellationToken ct)
         {
 
-            IEnumerable<string> entregas = indicadores.Select(n => n.Identificador).Distinct();
-
-            //if (await _dbConnection.VerifyIfIndicadorExist(entregas)) throw new NotaFiscalRepositoryException("Uma ou mais indicadores já existem no banco de dados");
+            await _dbConnection.DeleteIndicadores();
 
             await _dbConnection.sqliteConnection.OpenAsync();
 
@@ -99,6 +97,9 @@ namespace DashboardLogistico.Data
             indicador.Aderencia = (!string.IsNullOrEmpty(valores[7])) ? Convert.ToDouble(valores[7]) : 0;
             indicador.Largada = (valores[10] == "Sim") ? 100 : 0;
             indicador.Homologacao = (!string.IsNullOrEmpty(valores[12])) ? Convert.ToDouble(valores[12]) : 0;
+            indicador.TotalNotas = (!string.IsNullOrEmpty(valores[17])) ? Convert.ToInt64(valores[17]) : 0;
+            indicador.NotasHomologadas = (!string.IsNullOrEmpty(valores[18])) ? Convert.ToInt64(valores[18]) : 0;
+            indicador.NotasAderencia = (!string.IsNullOrEmpty(valores[19])) ? Convert.ToInt64(valores[19]) : 0;
             indicador.Linha = linha;
 
             return indicador;

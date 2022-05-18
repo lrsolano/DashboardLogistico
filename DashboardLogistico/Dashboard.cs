@@ -2,17 +2,12 @@
 using DashboardLogistico.Data;
 using System;
 using System.Collections.Generic;
-using DashboardLogistico.Services;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Configuration;
-using System.Windows.Forms.DataVisualization.Charting;
 using System.IO;
 
 namespace DashboardLogistico
@@ -71,11 +66,14 @@ namespace DashboardLogistico
             filtros.HoraMaximaJornadaHoras = 8;
             filtros.RaioMaximoMetros = 300;
 
-            filtros.DataInicio = new DateTime(2020, 1, 1);
-            filtros.DataFim = DateTime.Now;
 
-            dateInicial.Value = new DateTime(2020, 1, 1); ;
-            dateFinal.Value = DateTime.Now;
+            var datas = await repositoryNota.RunQueryAsync("SELECT MIN(InicioViagem) Menor, MAX(InicioViagem) Maior FROM Notas where InicioViagem > '2010-01-01';");
+
+            filtros.DataInicio = Convert.ToDateTime(datas["Menor"][0]);
+            filtros.DataFim = Convert.ToDateTime(datas["Maior"][0]);
+
+            dateInicial.Value = Convert.ToDateTime(datas["Menor"][0]);
+            dateFinal.Value = Convert.ToDateTime(datas["Maior"][0]);
             comboAgrupamento.Text = "Unidade";
 
             maximoJornada.Value = 8;
@@ -90,7 +88,7 @@ namespace DashboardLogistico
 
             ConfigGlobal config = new ConfigGlobal();
 
-            config.CaminhoBaseDados = ConfigurationManager.AppSettings.Get("CaminhoBanco");
+            config.CaminhoBaseDados = @"banco.db";
             config.SenhaBanco = ConfigurationManager.AppSettings.Get("SenhaBanco");
 
             return config;
@@ -151,8 +149,13 @@ namespace DashboardLogistico
             filtros.Cliente = comboCliente.Text;
             filtros.CodCliente = comboCodCliente.Text;
             filtros.Identificador = comboIdentificador.Text;
-            filtros.DataInicio = dateInicial.Value;
-            filtros.DataFim = dateFinal.Value;
+
+            var dataInicio = new DateTime(dateInicial.Value.Year, dateInicial.Value.Month, dateInicial.Value.Day, 0, 0, 0);
+            var dataFim = new DateTime(dateFinal.Value.Year, dateFinal.Value.Month, dateFinal.Value.Day,23, 59, 59);
+
+
+            filtros.DataInicio = dataInicio;
+            filtros.DataFim = dataFim;
         }
 
         private async void buttonFiltrar_Click(object sender, EventArgs e)

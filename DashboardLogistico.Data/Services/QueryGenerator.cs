@@ -15,7 +15,7 @@ namespace DashboardLogistico.Data
 
             query.Append("SELECT ");
             query.Append($"{filtros.Group} Agrupamento, ");
-            query.Append(@" avg(Aderencia) Aderencia, avg(Homologacao) Homologacao, avg(Largada) Largada, count(identificador) Transportes  FROM Indicadores ");
+            query.Append(@" ((sum(CAST(NotasAderencia AS REAL))/sum(CAST(TotalNotas AS REAL))))*100 Aderencia, ((sum(CAST(NotasHomologadas AS REAL))/sum(CAST(TotalNotas AS REAL))))*100 Homologacao, avg(Largada) Largada, count(identificador) Transportes  FROM Indicadores ");
             query.Append(GenerateWhereIndicadores(filtros));
             query.Append($" group by {filtros.Group} order by data; ");
 
@@ -28,7 +28,7 @@ namespace DashboardLogistico.Data
 
             query.Append("SELECT ");
             query.Append($"{filtros.Group} Agrupamento, strftime('%m-%Y', data) dataInicio, ");
-            query.Append(@"avg(Homologacao) Valor FROM Indicadores ");
+            query.Append(@"((sum(CAST(NotasHomologadas AS REAL))/sum(CAST(TotalNotas AS REAL))))*100 Valor FROM Indicadores ");
             query.Append(GenerateWhereIndicadores(filtros));
             query.Append($" group by {filtros.Group}, dataInicio order by data;");
 
@@ -41,7 +41,7 @@ namespace DashboardLogistico.Data
 
             query.Append("SELECT ");
             query.Append($"{filtros.Group} Agrupamento, strftime('%m-%Y', data) dataInicio, ");
-            query.Append(@"avg(Aderencia) Valor FROM Indicadores ");
+            query.Append(@"((sum(CAST(NotasAderencia AS REAL))/sum(CAST(TotalNotas AS REAL))))*100 Valor FROM Indicadores ");
             query.Append(GenerateWhereIndicadores(filtros));
             query.Append($" group by {filtros.Group}, dataInicio order by data;");
 

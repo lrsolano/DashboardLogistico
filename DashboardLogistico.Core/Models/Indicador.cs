@@ -16,6 +16,9 @@ namespace DashboardLogistico.Core
         public string Cooperativa { get; set; }
         public double Aderencia { get; set; }
         public long Largada { get; set; }
+        public long TotalNotas { get; set; }
+        public long NotasHomologadas { get; set; }
+        public long NotasAderencia { get; set; }
         public double Homologacao { get; set; }
         public string Linha { get; set; }
     }

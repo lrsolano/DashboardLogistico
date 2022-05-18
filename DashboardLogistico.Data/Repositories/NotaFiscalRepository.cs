@@ -92,7 +92,7 @@ namespace DashboardLogistico.Data
 
         public async Task<Dictionary<string, List<object>>> RunQueryAsync(string query)
         {
-            return await _dbConnection.ExecuteQuery(query);
+            return await _dbConnection.ExecuteQueryAsync(query);
         }
 
         public async Task<List<Jornada>> GetJornadaAsync(string query)

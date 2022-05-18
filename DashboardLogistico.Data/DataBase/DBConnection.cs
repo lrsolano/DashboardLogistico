@@ -26,6 +26,7 @@ namespace DashboardLogistico.Data
             else
             {
                 sqliteConnection = new SQLiteConnection($"Data Source={caminho}; Version=3;");
+                CriarTabelaSQlite();
             }
             
         }
@@ -85,8 +86,7 @@ namespace DashboardLogistico.Data
                                           Latitude DECIMAL(20,5) NULL,
                                           SeriePernoite VARCHAR(200) NULL,
                                           StatusViagem VARCHAR(200) NULL,
-                                          Entrega VARCHAR(200) NULL,
-                                          Linha BLOB NULL
+                                          Entrega VARCHAR(200) NULL
                                           );";
                     cmd.ExecuteNonQuery();
 
@@ -112,7 +112,9 @@ namespace DashboardLogistico.Data
                                         Aderencia DECIMAL(10,2) NULL,
                                         Homologacao DECIMAL(10,2) NULL,
                                         Largada INT NULL,
-                                        Linha BLOB NULL
+                                        TotalNotas INT NULL,
+                                        NotasHomologadas INT NULL,
+                                        NotasAderencia INT NULL
                                         );";
 
                     cmd.ExecuteNonQuery();
@@ -132,9 +134,9 @@ namespace DashboardLogistico.Data
             {
                 cmd.CommandText = @"INSERT INTO Notas (CodCLiente, Cliente, Endereco, Bairro, Cidade, Placa, Motorista, Cooperativa, InicioEntrega, FimEntrega, NF, SeqProgramada, SeqReal,
 	                                    Identificador, CodAnomalia, Anomalia, PesoBruto, Longitude, DataAnomalia, InicioViagem, Unidade, FimViagem, Baixa, MetrosEntrega, EntregaPrevistas, EntregasRealizadas,
-                                        FimDescarregamento, Valor, Latitude, SeriePernoite, StatusViagem, Entrega, Linha) values (@CodCLiente, @Cliente, @Endereco, @Bairro, @Cidade, @Placa, @Motorista, @Cooperativa, @InicioEntrega, @FimEntrega, @NF, @SeqProgramada, @SeqReal,
+                                        FimDescarregamento, Valor, Latitude, SeriePernoite, StatusViagem, Entrega) values (@CodCLiente, @Cliente, @Endereco, @Bairro, @Cidade, @Placa, @Motorista, @Cooperativa, @InicioEntrega, @FimEntrega, @NF, @SeqProgramada, @SeqReal,
 	                                    @Identificador, @CodAnomalia, @Anomalia, @PesoBruto, @Longitude, @DataAnomalia, @InicioViagem, @Unidade, @FimViagem, @Baixa, @MetrosEntrega, @EntregaPrevistas, @EntregasRealizadas,
-                                        @FimDescarregamento, @Valor, @Latitude, @SeriePernoite, @StatusViagem, @Entrega, @Linha); ";
+                                        @FimDescarregamento, @Valor, @Latitude, @SeriePernoite, @StatusViagem, @Entrega); ";
 
                 cmd.Parameters.AddWithValue("@CodCLiente", nota.CodCliente);
                 cmd.Parameters.AddWithValue("@Cliente", nota.Cliente);
@@ -168,7 +170,6 @@ namespace DashboardLogistico.Data
                 cmd.Parameters.AddWithValue("@SeriePernoite", nota.SeriePernoite);
                 cmd.Parameters.AddWithValue("@StatusViagem", nota.StatusViagem);
                 cmd.Parameters.AddWithValue("@Entrega", nota.Entrega);
-                cmd.Parameters.AddWithValue("@Linha", nota.Linha);
 
 
                 cmd.ExecuteNonQuery();
@@ -182,8 +183,8 @@ namespace DashboardLogistico.Data
             using (var cmd = sqliteConnection.CreateCommand())
             {
                 cmd.CommandText = @"INSERT INTO Indicadores (Regional, Unidade, Data, Identificador, Placa, Cooperativa, Aderencia, Homologacao,
-	                                    Largada, Linha) values (@Regional, @Unidade, @Data, @Identificador, @Placa, @Cooperativa, @Aderencia,
-	                                    @Homologacao, @Largada, @Linha); ";
+	                                    Largada, TotalNotas, NotasHomologadas, NotasAderencia) values (@Regional, @Unidade, @Data, @Identificador, @Placa, @Cooperativa, @Aderencia,
+	                                    @Homologacao, @Largada, @TotalNotas, @NotasHomologadas, @NotasAderencia); ";
 
                 cmd.Parameters.AddWithValue("@Regional", indicador.Regional);
                 cmd.Parameters.AddWithValue("@Unidade", indicador.Unidade);
@@ -194,7 +195,9 @@ namespace DashboardLogistico.Data
                 cmd.Parameters.AddWithValue("@Aderencia", indicador.Aderencia);
                 cmd.Parameters.AddWithValue("@Homologacao", indicador.Homologacao);
                 cmd.Parameters.AddWithValue("@Largada", indicador.Largada);
-                cmd.Parameters.AddWithValue("@Linha", indicador.Linha);
+                cmd.Parameters.AddWithValue("@TotalNotas", indicador.TotalNotas);
+                cmd.Parameters.AddWithValue("@NotasHomologadas", indicador.NotasHomologadas);
+                cmd.Parameters.AddWithValue("@NotasAderencia", indicador.NotasAderencia);
 
 
                 cmd.ExecuteNonQuery();
@@ -250,7 +253,6 @@ namespace DashboardLogistico.Data
                     if (rdr["SeriePernoite"] != DBNull.Value) nota.SeriePernoite = Convert.ToString(rdr["SeriePernoite"]);
                     if (rdr["StatusViagem"] != DBNull.Value) nota.StatusViagem = Convert.ToString(rdr["StatusViagem"]);
                     if (rdr["Entrega"] != DBNull.Value) nota.Entrega = Convert.ToString(rdr["Entrega"]);
-                    if (rdr["Linha"] != DBNull.Value) nota.Linha = Convert.ToString(rdr["Linha"]);
 
                     notaFiscals.Add(nota);
 
@@ -314,7 +316,7 @@ namespace DashboardLogistico.Data
             return result;
         }
 
-        internal async Task<Dictionary<string, List<object>>> ExecuteQuery(string query)
+        internal async Task<Dictionary<string, List<object>>> ExecuteQueryAsync(string query)
         {
             Dictionary<string, List<object>> data = new Dictionary<string, List<object>>();
 
@@ -519,6 +521,22 @@ namespace DashboardLogistico.Data
             sqliteConnection.Close();
 
             return indicadores;
+        }
+
+        internal async Task DeleteIndicadores()
+        {
+            await sqliteConnection.OpenAsync();
+
+            using (var cmd = sqliteConnection.CreateCommand())
+            {
+                long mes = DateTime.Now.Month;
+                long ano = DateTime.Now.Year;
+
+                cmd.CommandText = $"DELETE FROM indicadores WHERE Data >= '{ano}-{mes}-01';";
+                await cmd.ExecuteNonQueryAsync(); 
+            }
+
+            sqliteConnection.Close();
         }
     }
 }
